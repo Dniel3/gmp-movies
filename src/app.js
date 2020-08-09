@@ -11,6 +11,8 @@ import ErrorBoundary from './error_boundary';
 
 const template = <>
                     <Header />
+                    // Error boundary logic will change later. 
+                       Set prop value to true to see Error MessageChannel.
                     <ErrorBoundary hasErrors={false}>
                         <Home />
                     </ErrorBoundary>
