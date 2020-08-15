@@ -1,6 +1,6 @@
 # gmp-movies
 
-Run app:
+ Run app:
 
 - Install dependencies: 
     npm install
