@@ -1,6 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 
-const ErrorBoundary = (props) => {
+interface ErrorBoundaryProps {
+    hasErrors: boolean;
+    children: React.ReactNode;
+}
+
+const ErrorBoundary = (props: ErrorBoundaryProps) => {
     const ErrorMessage = (
         <h2>An Error happended while loading movies, please try again.</h2>
     );

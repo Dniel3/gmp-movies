@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import FilterBar from '../../components/filterbar/filter_bar'
 import Logo  from '../../components/logo/logo';
 import './header.scss';

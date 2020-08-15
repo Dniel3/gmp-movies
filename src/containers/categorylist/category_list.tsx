@@ -1,7 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import Category from '../../components/category/category';
 
-const CATEGORIES = [
+export interface CategoryProps {
+    name: string;
+} 
+
+const CATEGORIES: CategoryProps[] = [
     {name: 'ALL'}, 
     {name: 'DOCUMENTARY'}, 
     {name: 'COMEDY'}, 

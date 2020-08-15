@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import CategoryList from '../categorylist/category_list';
 import './home.scss';
 import MovieList from '../movielist/movie_list';

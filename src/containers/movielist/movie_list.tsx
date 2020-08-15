@@ -1,8 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import Movie from '../../components/movie/movie';
 import './movie_list.scss';
 
-const MOVIES = [
+export interface MovieProps {
+    title: string;
+    posterUrl: string;
+    year: number;
+    categories: string[];
+}
+
+const MOVIES: MovieProps[] = [
     {
         title: 'Sonic',
         posterUrl: 'https://www.joblo.com/assets/images/joblo/posters/2019/11/SonicPoster.jpg',

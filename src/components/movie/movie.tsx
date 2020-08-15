@@ -1,8 +1,8 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import * as React from 'react';
 import './movie.scss';
+import { MovieProps } from '../../containers/movielist/movie_list';
 
-const Movie = (props) => <div className="movie">
+const Movie = (props: MovieProps) => <div className="movie">
     <div className="poster"><img src={props.posterUrl} alt={props.title}/></div>
     <div className="description">
         <div className="row-1">
@@ -12,12 +12,5 @@ const Movie = (props) => <div className="movie">
         <div className="row-2">{props.categories.join(', ')}</div>
     </div>
 </div>;
-
-Movie.propTypes = {
-    title: propTypes.string.isRequired,
-    posterUrl: propTypes.string.isRequired,
-    categories: propTypes.array,
-    year: propTypes.number.isRequired,
-};
 
 export default Movie

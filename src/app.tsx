@@ -1,6 +1,6 @@
 // Webpack configured to handle files in other modules.
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import Footer from './components/footer/footer';
 import Logo from './components/logo/logo';
 import Header from './containers/header/header';
