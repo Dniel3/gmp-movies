@@ -15,6 +15,7 @@
   "dependencies": {
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
+    "@types/react-modal": "^3.10.6",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
@@ -27,6 +28,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-modal": "^3.11.2",
     "react-redux": "^7.2.1",
     "react-router": "^5.2.0",
     "redux": "^4.0.5",

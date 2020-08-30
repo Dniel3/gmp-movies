@@ -1,5 +1,5 @@
 .movie {
-    height: 465px;
+    height: 500px;
     width: 283px;
     margin: 10px;
 
@@ -10,6 +10,13 @@
         img {
             height: auto;
             width: inherit;
+        }
+
+        .floating-menu {
+            bottom: -50px;
+            float: right;
+            position: relative;
+            right: 20px;
         }
     }
 
