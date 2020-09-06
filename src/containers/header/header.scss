@@ -16,4 +16,39 @@
         font-size: xx-large;
         margin: 20px 20px;
     }
+
+    .movie-details {
+        display: flex;
+        color: white;
+        margin-top: 10px;
+
+        img {
+            height: 200px;
+            margin-right: 25px;
+        }
+
+        .overview {
+            font-size: large;
+        }
+
+        .title-rate {
+            align-items: center;
+            display: flex;
+            font-size: xxx-large;
+            
+            span {
+                border-radius: 100%;
+                border: thin solid white;
+                color: #f65261;
+                font-size: x-large;
+                margin: 25px;
+                padding: 7px;
+            }
+        }
+
+        .year-duration {
+            color: #f65261;
+            font-size: x-large;
+        }
+    }
 }

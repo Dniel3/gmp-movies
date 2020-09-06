@@ -7,14 +7,14 @@ import Logo from './components/logo/logo';
 import Header from './containers/header/header';
 import Home from './containers/home/home';
 import ErrorBoundary from './error_boundary';
-import { MovieProps } from './containers/movielist/movie_list';
+import { Movie } from './containers/movielist/movie_list';
 
 import './app.scss';
 import { Categories } from './containers/categorylist/category_list';
 
 ReactModal.setAppElement('#app');
 
-const MOVIES: MovieProps[] = [
+const MOVIES: Movie[] = [
     {
         id: 'q1',
         title: 'Sonic',
@@ -22,6 +22,7 @@ const MOVIES: MovieProps[] = [
         year: 2020,
         categories: Categories.ADVENTURE,
         overview: 'sonic in Green hills',
+        rating: 5,
     },
     {
         id: 'q2',
@@ -30,6 +31,7 @@ const MOVIES: MovieProps[] = [
         year: 2020,
         categories: Categories.ADVENTURE,
         overview: 'sonic in Green hills',
+        rating: 5,
     },
     {
         id: 'q3',
@@ -38,6 +40,7 @@ const MOVIES: MovieProps[] = [
         year: 2020,
         categories: Categories.ADVENTURE,
         overview: 'sonic in Green hills',
+        rating: 5,
     },
     {
         id: 'q4',
@@ -46,6 +49,7 @@ const MOVIES: MovieProps[] = [
         year: 2020,
         categories: Categories.ADVENTURE,
         overview: 'sonic in Green hills',
+        rating: 5,
     },
     {
         id: 'q5',
@@ -54,6 +58,7 @@ const MOVIES: MovieProps[] = [
         year: 2020,
         categories: Categories.ADVENTURE,
         overview: 'sonic in Green hills',
+        rating: 5,
     },
     {
         id: 'q6',
@@ -62,6 +67,7 @@ const MOVIES: MovieProps[] = [
         year: 2020,
         categories: Categories.ADVENTURE,
         overview: 'sonic in Green hills',
+        rating: 5,
     },
     {
         id: 'q7',
@@ -70,6 +76,7 @@ const MOVIES: MovieProps[] = [
         year: 2020,
         categories: Categories.ADVENTURE,
         overview: 'sonic in Green hills',
+        rating: 5,
     },
     {
         id: 'q8',
@@ -78,6 +85,7 @@ const MOVIES: MovieProps[] = [
         year: 2020,
         categories: Categories.ADVENTURE,
         overview: 'sonic in Green hills',
+        rating: 5,
     },
     {
         id: 'q9',
@@ -86,36 +94,36 @@ const MOVIES: MovieProps[] = [
         year: 2020,
         categories: Categories.ADVENTURE,
         overview: 'sonic in Green hills',
+        rating: 5,
     },
 ];
 
 interface AppState {
-    movies: MovieProps[];
+    movies: Movie[];
 }
 
-class App extends React.Component<{}, AppState> {
-
-    constructor(props: {}) {
-        super(props);
-        this.state = {
-            movies: [],
-        };
-    }
-
-    componentDidMount() {
-        this.setState({movies: MOVIES,});
-    }
-
-    render() {
-        return (<>
-                    <Header />
-                    <ErrorBoundary hasErrors={false}>
-                        <Home movies={this.state.movies} />
-                    </ErrorBoundary>
-                    <Footer><Logo /></Footer>
-                </>);
-    }
+export interface SelectedMovie {
+     movie: Movie|null; 
+     setMovie: React.Dispatch<React.SetStateAction<Movie|null>>;
 }
+
+const App = () => {
+
+    const [state, setState] = React.useState<AppState>({movies: []});
+    const [movie, setMovie] = React.useState<Movie|null>(null);
+
+    React.useEffect(() => {
+        setState({movies: MOVIES});
+    }, [state.movies]);
+
+    return (<>
+                <Header {...{movie, setMovie}} />
+                <ErrorBoundary hasErrors={false}>
+                    <Home movies={state.movies} setMovie={setMovie} />
+                </ErrorBoundary>
+                <Footer><Logo /></Footer>
+            </>);
+};
 
 ReactDOM.render(
     <App />, document.getElementById('app')

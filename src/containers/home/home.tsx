@@ -1,10 +1,11 @@
 import * as React from 'react';
 import CategoryList from '../categorylist/category_list';
 import './home.scss';
-import MovieList, { MovieProps } from '../movielist/movie_list';
+import MovieList, { Movie } from '../movielist/movie_list';
 
 interface HomeProps {
-    movies: MovieProps[];
+    movies: Movie[];
+    setMovie: React.Dispatch<React.SetStateAction<Movie|null>>;
 }
 
 const Home = 
@@ -21,7 +22,7 @@ const Home =
                     </select>
                 </div>
             </div>
-            <MovieList movies={props.movies} />
+            <MovieList movies={props.movies} setMovie={props.setMovie} />
         </div>;
 
 export default Home

@@ -1,26 +1,28 @@
 import * as React from 'react';
-import Movie from '../../components/movie/movie';
 import './movie_list.scss';
-import { CategoryProps, Categories } from '../categorylist/category_list';
+import {Categories } from '../categorylist/category_list';
+import MovieItem from '../../components/movie/movie';
 
-export interface MovieProps {
+export interface Movie {
     id: string;
     title: string;
     posterUrl: string;
     year: number;
     categories: Categories;
     overview: string;
+    rating?: number;
 }
 
 interface MovieListProps {
- movies: MovieProps[];
+ movies: Movie[];
+ setMovie: React.Dispatch<React.SetStateAction<Movie|null>>;
 }
 
-const MovieList = (props: MovieListProps) => <>
-    <p>{props.movies.length} movies found</p>
+const MovieList = ({movies, setMovie}: MovieListProps) => <>
+    <p>{movies.length} movies found</p>
     <div className="movies">{
-        props.movies.map((movie, index) => 
-            (<Movie {...movie} key={`${movie.id}-movie-${index}`}/>))
+        movies.map((movie, index) => 
+            (<MovieItem {...{movie, setMovie}} key={`${movie.id}-movie-${index}`}/>))
     }</div>
 </>;
 

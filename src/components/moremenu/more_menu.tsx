@@ -1,10 +1,10 @@
 import * as React from 'react';
 import './more_menu.scss';
-import { EditMovieDialog } from '../moviedialogs/edit_movie';
-import { DeleteMovieDialog } from '../moviedialogs/delete_movie';
-import { MovieProps } from '../../containers/movielist/movie_list';
+import { Movie } from '../../containers/movielist/movie_list';
+import EditMovieDialog from '../moviedialogs/edit_movie';
+import DeleteMovieDialog from '../moviedialogs/delete_movie';
 
-const MoreMenu = (props: MovieProps) => {
+const MoreMenu = (props: Movie) => {
     return (<>
         <div className="dropdown">
             <div className="container">
@@ -14,7 +14,7 @@ const MoreMenu = (props: MovieProps) => {
             </div>
             <div className="dropdown-content">
                 <EditMovieDialog {...props} />
-                <DeleteMovieDialog />
+                <DeleteMovieDialog {...props} />
             </div>
         </div> 
     </>);
