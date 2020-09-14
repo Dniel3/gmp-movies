@@ -1,24 +1,21 @@
 import * as React from 'react';
 import './add_movie.scss';
 import * as ReactModal from 'react-modal';
-import { Categories } from '../../containers/categorylist/category_list';
+import { Genres } from '../../containers/genrelist/genre_list';
 import { MovieDialogState, INITIAL_STATE, useMovieDialog, PANEL_CLASS } from './common';
     
 const AddMovieDialog = () => {
  
     const [state, setState] = React.useState<MovieDialogState>(INITIAL_STATE);
+    const [title, setTitle] = React.useState('');
+    const [releaseDate, setReleaseDate] = React.useState('');
+    const [posterPath, setPosterPath] = React.useState('');
+    const [genres, setGenres] = React.useState([] as string[]);
+    const [overview, setOverview] = React.useState('');
+    const [runtime, setRuntime] = React.useState('');
 
     const {closeModal, openModal} = useMovieDialog(state, setState);
     
-    const genreChanged = (event: React.ChangeEvent) => {
-        const categories = event.target.textContent as Categories;
-        setState({...state, movie: {...state.movie, categories}});
-    }
-    
-    const dateChanged = (event: React.ChangeEvent) => {
-        const date = event.target.textContent as Categories;
-        setState({...state, movie: {...state.movie, year: Number(date)}});
-    }
 
     return (<>
         <button className="add-button" onClick={openModal}>+ ADD MOVIE</button>
@@ -34,31 +31,51 @@ const AddMovieDialog = () => {
                 
                 <div className="form-field">
                     <span>TITLE</span>
-                    <input defaultValue="" value={state.movie.title} placeholder="Title here" />
-                </div >
+                    <input value=""
+                        onChange={(event: React.ChangeEvent) => setTitle(event.target.textContent || '')} 
+                        placeholder="Title here" />                
+                </div>
+
                 <div className="form-field">
                     <span>RELEASE DATE</span>
-                    <input value={state.movie.year} onChange={dateChanged} type="date" placeholder="Date here" />
+                    <input value="" 
+                        onChange={(event: React.ChangeEvent) => setReleaseDate(event.target.textContent || '')} 
+                        type="date" 
+                        placeholder="Date here" /> 
                 </div>
+
                 <div className="form-field">
                     <span>MOVIE URL</span>
-                    <input value={state.movie.posterUrl} placeholder="Movie URL here" />
+                    <input value=""
+                        onChange={(event: React.ChangeEvent) => setPosterPath(event.target.textContent || '')}
+                        placeholder="Movie URL here" />                
                 </div>
+
                 <div className="form-field">
                     <span>GENRE</span>
-                    <select value={state.movie.categories} onChange={genreChanged} placeholder="Genre here">
-                        <option value={Categories.ALL}>{Categories.ALL}</option>
-                        <option value={Categories.ADVENTURE}>{Categories.ADVENTURE}</option>
+                    <select multiple 
+                            value={[]}
+                            onChange={(event: React.ChangeEvent) => setGenres(event.target.textContent?.split(',') || [] as string[])} 
+                            placeholder="Genre here">
+                        <option value={Genres.ALL}>{Genres.ALL}</option>
+                        <option value={Genres.ADVENTURE}>{Genres.ADVENTURE}</option>
                     </select>
                 </div>
+
                 <div className="form-field">
                     <span>OVERVIEW</span>
-                    <textarea value={state.movie.overview} placeholder="Overview here" />
+                    <textarea value="" 
+                        onChange={(event: React.ChangeEvent) => setOverview(event.target.textContent || '')}
+                        placeholder="Overview here" />                
                 </div>
+
                 <div className="form-field">
                     <span>RUNTIME</span>
-                    <input value="" placeholder="Runtime here"/>
+                    <input value=""
+                        onChange={(event: React.ChangeEvent) => setRuntime(event.target.textContent || '')}
+                        placeholder="Runtime here"/>                
                 </div>
+
                 <div className="action-buttons">
                     <button className="reset">RESET</button>
                     <button className="submit" onClick={closeModal}>SUBMIT</button>

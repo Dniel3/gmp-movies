@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Movie } from '../../containers/movielist/movie_list';
-import { Categories } from '../../containers/categorylist/category_list';
+import { Genres } from '../../containers/genrelist/genre_list';
 
 export const PANEL_CLASS = {
     content : {
@@ -22,13 +22,13 @@ export const PANEL_CLASS = {
   export const INITIAL_STATE: MovieDialogState = {
       isOpened: false,
       movie: {
-          id: '', 
+          id: 0, 
           title: '', 
-          posterUrl: '', 
-          year: 0, 
-          categories: Categories.ALL, 
+          poster_path: '', 
+          release_date: '0000-00-00', 
+          genres: [Genres.ALL], 
           overview: ''
-      },};
+      } as Movie,};
   
   export function useMovieDialog(state: MovieDialogState, setState: React.Dispatch<React.SetStateAction<MovieDialogState>>): {closeModal: () => void, openModal: () => void} {
       const closeModal = React.useCallback(() => setState(INITIAL_STATE), [state.isOpened]);

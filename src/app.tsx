@@ -10,97 +10,11 @@ import ErrorBoundary from './error_boundary';
 import { Movie } from './containers/movielist/movie_list';
 
 import './app.scss';
-import { Categories } from './containers/categorylist/category_list';
+import { Provider, useDispatch } from 'react-redux';
+import store, { useTypedSelector } from './redux/store';
+import { fetchMovies } from './redux/actions';
 
 ReactModal.setAppElement('#app');
-
-const MOVIES: Movie[] = [
-    {
-        id: 'q1',
-        title: 'Sonic',
-        posterUrl: 'https://www.joblo.com/assets/images/joblo/posters/2019/11/SonicPoster.jpg',
-        year: 2020,
-        categories: Categories.ADVENTURE,
-        overview: 'sonic in Green hills',
-        rating: 5,
-    },
-    {
-        id: 'q2',
-        title: 'Sonic',
-        posterUrl: 'https://www.joblo.com/assets/images/joblo/posters/2019/11/SonicPoster.jpg',
-        year: 2020,
-        categories: Categories.ADVENTURE,
-        overview: 'sonic in Green hills',
-        rating: 5,
-    },
-    {
-        id: 'q3',
-        title: 'Sonic',
-        posterUrl: 'https://www.joblo.com/assets/images/joblo/posters/2019/11/SonicPoster.jpg',
-        year: 2020,
-        categories: Categories.ADVENTURE,
-        overview: 'sonic in Green hills',
-        rating: 5,
-    },
-    {
-        id: 'q4',
-        title: 'Sonic',
-        posterUrl: 'https://www.joblo.com/assets/images/joblo/posters/2019/11/SonicPoster.jpg',
-        year: 2020,
-        categories: Categories.ADVENTURE,
-        overview: 'sonic in Green hills',
-        rating: 5,
-    },
-    {
-        id: 'q5',
-        title: 'Sonic',
-        posterUrl: 'https://www.joblo.com/assets/images/joblo/posters/2019/11/SonicPoster.jpg',
-        year: 2020,
-        categories: Categories.ADVENTURE,
-        overview: 'sonic in Green hills',
-        rating: 5,
-    },
-    {
-        id: 'q6',
-        title: 'Sonic',
-        posterUrl: 'https://www.joblo.com/assets/images/joblo/posters/2019/11/SonicPoster.jpg',
-        year: 2020,
-        categories: Categories.ADVENTURE,
-        overview: 'sonic in Green hills',
-        rating: 5,
-    },
-    {
-        id: 'q7',
-        title: 'Sonic',
-        posterUrl: 'https://www.joblo.com/assets/images/joblo/posters/2019/11/SonicPoster.jpg',
-        year: 2020,
-        categories: Categories.ADVENTURE,
-        overview: 'sonic in Green hills',
-        rating: 5,
-    },
-    {
-        id: 'q8',
-        title: 'Sonic',
-        posterUrl: 'https://www.joblo.com/assets/images/joblo/posters/2019/11/SonicPoster.jpg',
-        year: 2020,
-        categories: Categories.ADVENTURE,
-        overview: 'sonic in Green hills',
-        rating: 5,
-    },
-    {
-        id: 'q9',
-        title: 'Sonic',
-        posterUrl: 'https://www.joblo.com/assets/images/joblo/posters/2019/11/SonicPoster.jpg',
-        year: 2020,
-        categories: Categories.ADVENTURE,
-        overview: 'sonic in Green hills',
-        rating: 5,
-    },
-];
-
-interface AppState {
-    movies: Movie[];
-}
 
 export interface SelectedMovie {
      movie: Movie|null; 
@@ -108,23 +22,27 @@ export interface SelectedMovie {
 }
 
 const App = () => {
+    const dispatch = useDispatch();
 
-    const [state, setState] = React.useState<AppState>({movies: []});
-    const [movie, setMovie] = React.useState<Movie|null>(null);
+    const movies = useTypedSelector(state => state.movies);
 
     React.useEffect(() => {
-        setState({movies: MOVIES});
-    }, [state.movies]);
+        dispatch(fetchMovies());
+    }, []);
 
     return (<>
-                <Header {...{movie, setMovie}} />
+                <Header />
                 <ErrorBoundary hasErrors={false}>
-                    <Home movies={state.movies} setMovie={setMovie} />
+                    <Home movies={...movies} />
                 </ErrorBoundary>
                 <Footer><Logo /></Footer>
             </>);
 };
 
 ReactDOM.render(
-    <App />, document.getElementById('app')
+    <Provider store={store}>
+        <App />
+    </Provider>, 
+    document.getElementById('app')
 );
+store.subscribe(() => {console.log(store.getState())});

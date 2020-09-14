@@ -3,10 +3,13 @@ import './edit_movie.scss';
 import * as ReactModal from 'react-modal';
 import { useMovieDialog, PANEL_CLASS } from './common';
 import { Movie } from '../../containers/movielist/movie_list';
+import { useDispatch } from 'react-redux';
+import { deleteMovie } from '../../redux/actions';
 
 const DeleteMovieDialog  = (props: Movie) => {
 
     const [state, setState] = React.useState({isOpened: false, movie: props});
+    const dispatch = useDispatch();
 
     const {closeModal, openModal} = useMovieDialog(state, setState);
     
@@ -27,7 +30,7 @@ const DeleteMovieDialog  = (props: Movie) => {
                 </div >
                 
                 <div className="action-buttons">
-                    <button className="submit" onClick={closeModal}>CONFIRM</button>
+                    <button className="submit" onClick={() => dispatch(deleteMovie(props.id))}>CONFIRM</button>
                 </div>
             </form>
         </ReactModal>
