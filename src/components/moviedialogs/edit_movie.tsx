@@ -4,6 +4,8 @@ import * as ReactModal from 'react-modal';
 import { useMovieDialog, PANEL_CLASS } from './common';
 import { Movie } from '../../containers/movielist/movie_list';
 import { Genres } from '../../containers/genrelist/genre_list';
+import { useDispatch } from 'react-redux';
+import { editMovie } from '../../redux/actions';
 
 const EditMovieDialog = (props: Movie) => {
 
@@ -17,6 +19,20 @@ const EditMovieDialog = (props: Movie) => {
 
     const {closeModal, openModal} = useMovieDialog(state, setState);
     
+    const dispatch = useDispatch();
+
+    const edit = () => {
+        dispatch(editMovie({
+            ...props,
+            title,
+            release_date: releaseDate,
+            poster_path: posterPath,
+            overview,
+            runtime,
+            genres,
+        })); 
+    };
+
     return (<>
         <button className="edit-button" onClick={openModal}>EDIT</button>
         <ReactModal
@@ -37,14 +53,14 @@ const EditMovieDialog = (props: Movie) => {
                 <div className="form-field">
                     <span>TITLE</span>
                     <input value={title} 
-                        onChange={(event: React.ChangeEvent) => setTitle(event.target.textContent || '')} 
+                        onChange={(event) => setTitle(event.target.value)} 
                         placeholder="Title here" />
                 </div>
 
                 <div className="form-field">
                     <span>RELEASE DATE</span>
                     <input value={releaseDate} 
-                        onChange={(event: React.ChangeEvent) => setReleaseDate(event.target.textContent || '')} 
+                        onChange={(event) => setReleaseDate(event.target.value)} 
                         type="date" 
                         placeholder="Date here" />
                 </div>
@@ -52,7 +68,7 @@ const EditMovieDialog = (props: Movie) => {
                 <div className="form-field">
                     <span>MOVIE URL</span>
                     <input value={posterPath}
-                        onChange={(event: React.ChangeEvent) => setPosterPath(event.target.textContent || '')}
+                        onChange={(event) => setPosterPath(event.target.value)}
                         placeholder="Movie URL here" />
                 </div>
                 
@@ -60,7 +76,7 @@ const EditMovieDialog = (props: Movie) => {
                     <span>GENRE</span>
                     <select multiple 
                             value={genres}
-                            onChange={(event: React.ChangeEvent) => setGenres(event.target.textContent?.split(', ') || [])} 
+                            onChange={(event) => setGenres(event.target.value.split(', ') || [])} 
                             placeholder="Genre here">
                         <option value={Genres.ALL}>{Genres.ALL}</option>
                         <option value={Genres.ADVENTURE}>{Genres.ADVENTURE}</option>
@@ -70,20 +86,20 @@ const EditMovieDialog = (props: Movie) => {
                 <div className="form-field">
                     <span>OVERVIEW</span>
                     <textarea value={overview} 
-                        onChange={(event: React.ChangeEvent) => setOverview(event.target.textContent || '')}
+                        onChange={(event) => setOverview(event.target.value || '')}
                         placeholder="Overview here" />
                 </div>
 
                 <div className="form-field">
                     <span>RUNTIME</span>
                     <input value={runtime}
-                        onChange={(event: React.ChangeEvent) => setRuntime(Number(event.target.textContent) || 0)}
+                        onChange={(event) => setRuntime(Number(event.target.value) || 0)}
                         placeholder="Runtime here"/>
                 </div>
 
                 <div className="action-buttons">
                     <button className="reset">RESET</button>
-                    <button className="submit" onClick={closeModal}>SUBMIT</button>
+                    <button className="submit" onClick={edit}>SUBMIT</button>
                 </div>
             </form>
         </ReactModal>

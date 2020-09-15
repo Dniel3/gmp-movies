@@ -25,16 +25,6 @@ export const listMovies = (movies: Movie[]): MovieAction => ({
     payload: {movies},
 });
 
-export const filterMoviesBy = (filters: string[]): MovieAction => ({
-    type: MoviesActions.FILTER,
-    payload: {filters},
-});
-
-export const orderMoviesBy = (order: string): MovieAction => ({
-    type: MoviesActions.SORT,
-    payload: {order},
-});
-
 export const selectMovie = (selectedMovie: Movie|null): MovieAction => ({
     type: MoviesActions.SELECTED,
     payload: {selectedMovie},
@@ -57,6 +47,40 @@ export const deleteMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[
         dispatch(startLoading());
         const deleteRequest = new Request(`${MOVIES_API_ROOT_URL}/${movieId}`, {method: 'DELETE'});
         await fetch(deleteRequest).then(result => result.json());
+        return dispatch(fetchMovies());
+    };
+}
+
+export const createMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = (movie: Partial<Movie>) => {
+    return async (dispatch) => {
+        dispatch(startLoading());
+        const createRequest = new Request(`${MOVIES_API_ROOT_URL}`, 
+                {
+                    method: 'POST', 
+                    body: JSON.stringify(movie),                    
+                    headers: {'Content-Type': 'application/json'},
+        });
+        console.log(createRequest);
+        const response = await fetch(createRequest).then(result => result.json());
+        console.log(response);
+        return dispatch(fetchMovies());
+    };
+}
+
+export const editMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = (movie: Movie) => {
+    return async (dispatch) => {
+        dispatch(startLoading());
+        const createRequest = new Request(`${MOVIES_API_ROOT_URL}`, 
+                { 
+                    method: 'PUT', 
+                    body: JSON.stringify(movie),  
+                    headers: {'Content-Type': 'application/json'},
+            });
+        console.log(createRequest);
+
+        const response = await fetch(createRequest).then(result => result.json());
+        console.log(response);
+
         return dispatch(fetchMovies());
     };
 }
