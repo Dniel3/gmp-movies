@@ -6,12 +6,12 @@ export interface GenreProps {
 } 
 
 export enum Genres {
-    ALL = 'all',
-    DOCUMENTARY = 'documentary', 
-    COMEDY = 'action', 
-    HORROR = 'horror', 
-    CRIME = 'crime',
-    ADVENTURE = 'adventure',
+    ALL = 'All',
+    DOCUMENTARY = 'Documentary', 
+    COMEDY = 'Action', 
+    HORROR = 'Horror', 
+    CRIME = 'Crime',
+    ADVENTURE = 'Adventure',
 }
 
 const GenreList = () => (

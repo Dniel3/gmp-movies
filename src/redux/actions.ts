@@ -34,53 +34,82 @@ export const startLoading = (loading = true) => ({type: MoviesActions.LOADING, p
 
 export const error = (error: string) => ({type: MoviesActions.ERROR, payload: {error}});
 
-export const fetchMovies: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = () => {
-    return async (dispatch) => {
-        dispatch(startLoading());
-        const response = await fetch(MOVIES_API_ROOT_URL).then(result => result.json());
-        return dispatch(listMovies(response.data));
-    };
+export const fetchMovies: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = 
+    () => {
+        return async (dispatch) => {
+            dispatch(startLoading());
+            const response = await fetch(MOVIES_API_ROOT_URL)
+                .then(result => result.json());
+            return dispatch(listMovies(response.data));
+        };
 }
 
-export const deleteMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = (movieId: number) => {
-    return async (dispatch) => {
-        dispatch(startLoading());
-        const deleteRequest = new Request(`${MOVIES_API_ROOT_URL}/${movieId}`, {method: 'DELETE'});
-        await fetch(deleteRequest).then(result => result.json());
-        return dispatch(fetchMovies());
-    };
+export const deleteMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = 
+    (movieId: number) => {
+        return async (dispatch) => {
+            dispatch(startLoading());
+            const deleteRequest = new Request(`${MOVIES_API_ROOT_URL}/${movieId}`, {method: 'DELETE'});
+            await fetch(deleteRequest).then(result => result.json());
+            return dispatch(fetchMovies());
+        };
 }
 
-export const createMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = (movie: Partial<Movie>) => {
-    return async (dispatch) => {
-        dispatch(startLoading());
-        const createRequest = new Request(`${MOVIES_API_ROOT_URL}`, 
-                {
-                    method: 'POST', 
-                    body: JSON.stringify(movie),                    
-                    headers: {'Content-Type': 'application/json'},
-        });
-        console.log(createRequest);
-        const response = await fetch(createRequest).then(result => result.json());
-        console.log(response);
-        return dispatch(fetchMovies());
-    };
-}
-
-export const editMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = (movie: Movie) => {
-    return async (dispatch) => {
-        dispatch(startLoading());
-        const createRequest = new Request(`${MOVIES_API_ROOT_URL}`, 
-                { 
-                    method: 'PUT', 
-                    body: JSON.stringify(movie),  
-                    headers: {'Content-Type': 'application/json'},
+export const createMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = 
+    (movie: Partial<Movie>) => {
+        return async (dispatch) => {
+            dispatch(startLoading());
+            const createRequest = new Request(`${MOVIES_API_ROOT_URL}`, 
+                    {
+                        method: 'POST', 
+                        body: JSON.stringify(movie),                    
+                        headers: {'Content-Type': 'application/json'},
             });
-        console.log(createRequest);
+            const response = await fetch(createRequest).then(result => result.json());
+            return dispatch(fetchMovies());
+        };
+}
 
-        const response = await fetch(createRequest).then(result => result.json());
-        console.log(response);
+export const editMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = 
+    (movie: Movie) => {
+        return async (dispatch) => {
+            dispatch(startLoading());
+            const editRequest = new Request(`${MOVIES_API_ROOT_URL}`, 
+                    { 
+                        method: 'PUT', 
+                        body: JSON.stringify(movie),  
+                        headers: {'Content-Type': 'application/json'},
+                });
+            await fetch(editRequest).then(result => result.json());
+            return dispatch(fetchMovies());
+        };
+}
 
-        return dispatch(fetchMovies());
-    };
+export const filterMovies: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = 
+    (filter: string) => {
+        return async (dispatch) => {
+            dispatch(startLoading());
+            const response = await fetch(`${MOVIES_API_ROOT_URL}?filter=${filter}`)
+                .then(result => result.json());
+            return dispatch(listMovies(response.data));
+        };
+}
+
+export const orderMovies: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = 
+    (orderBy: string) => {
+        return async (dispatch) => {
+            dispatch(startLoading());
+            const response = await fetch(`${MOVIES_API_ROOT_URL}?sortBy=${orderBy}&sortOrder=desc`)
+                .then(result => result.json());
+            return dispatch(listMovies(response.data));
+        };
+}
+
+export const searchMovies: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[], unknown, MovieAction>> = 
+    (searchBy: string) => {
+        return async (dispatch) => {
+            dispatch(startLoading());
+            const response = await fetch(`${MOVIES_API_ROOT_URL}?search=${searchBy}&searchBy=title`)
+                .then(result => result.json());
+            return dispatch(listMovies(response.data));
+        };
 }
