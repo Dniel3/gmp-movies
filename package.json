@@ -17,12 +17,14 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-modal": "^3.10.6",
     "@types/react-redux": "^7.1.9",
+    "@types/yup": "^0.29.7",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^4.3.0",
+    "formik": "^2.1.5",
     "jest": "^26.4.2",
     "live-server": "^1.2.1",
     "node-sass": "^4.14.1",
@@ -38,7 +40,8 @@
     "ts-loader": "^8.0.3",
     "typescript": "^3.9.7",
     "webpack": "^4.44.1",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "webpack-cli": "^3.3.12"

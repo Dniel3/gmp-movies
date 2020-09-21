@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Movie } from '../../containers/movielist/movie_list';
 import { Genres } from '../../containers/genrelist/genre_list';
+import * as Yup from 'yup';
 
 export const PANEL_CLASS = {
     content : {
@@ -12,30 +13,56 @@ export const PANEL_CLASS = {
       transform: 'translate(-50%, -50%)',
       background: '#232323',
     }
-  };
-  
-  export interface MovieDialogState {
-      isOpened: boolean;
-      movie: Movie;
-  }
-  
-  export const INITIAL_STATE: MovieDialogState = {
-      isOpened: false,
-      movie: {
-          id: 0, 
-          title: '', 
-          poster_path: '', 
-          release_date: '0000-00-00', 
-          genres: [Genres.ALL], 
-          overview: ''
-      } as Movie,};
-  
-  export function useMovieDialog(state: MovieDialogState, setState: React.Dispatch<React.SetStateAction<MovieDialogState>>): {closeModal: () => void, openModal: () => void} {
-      const closeModal = React.useCallback(() => setState(INITIAL_STATE), [state.isOpened]);
-      
-      const openModal = React.useCallback(
-               () => setState({...state, isOpened: true,}), [state.isOpened]);
-  
-      return {closeModal, openModal};
-  }
-  
+};    
+
+export interface MovieDialogState {
+    isOpened: boolean;
+    movie: Movie;
+}
+
+export interface FormMovie {
+    id?: number;
+    title: string;
+    release_date: string;
+    poster_path: string;
+    overview: string;
+    runtime: number;
+    genres: string[];
+}
+
+export const INITIAL_STATE: MovieDialogState = {
+    isOpened: false,
+    movie: {
+        id: 0, 
+        title: '', 
+        poster_path: '', 
+        release_date: '0000-00-00', 
+        genres: [Genres.ALL], 
+        overview: ''
+    } as Movie,};
+
+export function useMovieDialog(state: MovieDialogState, 
+setState: React.Dispatch<React.SetStateAction<MovieDialogState>>): {closeModal: () => void, openModal: () => void} {
+    const closeModal = React.useCallback(() => setState(INITIAL_STATE), [state.isOpened]);
+    
+    const openModal = React.useCallback(
+            () => setState({...state, isOpened: true,}), [state.isOpened]);
+
+    return {closeModal, openModal};
+}
+
+const MOVIE_VALIDATION_SHAPE = {
+    title: Yup.string().required('Required!'),
+    release_date: Yup.date().required('Required!'),
+    poster_path: Yup.string().url('Insert URL!').required('Required!'),
+    overview: Yup.string().required('Required!'),
+    runtime: Yup.number().min(1, 'Too small!').required('Required!'),
+    genres: Yup.array().required('Required!'),
+};
+
+export const MOVIE_VALIDATION_SCHEMA = Yup.object().shape(MOVIE_VALIDATION_SHAPE);
+
+export const EDIT_MOVIE_VALIDATION_SCHEMA = Yup.object().shape({
+    ...MOVIE_VALIDATION_SHAPE,
+    id: Yup.number().required('Required!'),
+});

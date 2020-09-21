@@ -1,21 +1,21 @@
+.title {
+    align-items: center;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+        background-color: transparent;
+        border: transparent;
+        color: white;
+        cursor: pointer;
+    }
+}
+
 form {
     display: flex;
     flex-direction: column;
     color: #F65261;
-
-    .title {
-        align-items: center;
-        color: white;
-        display: flex;
-        justify-content: space-between;
-
-        button {
-            background-color: transparent;
-            border: transparent;
-            color: white;
-            cursor: pointer;
-        }
-    }
 
     .action-buttons {
         display: flex;
