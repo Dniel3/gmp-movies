@@ -7,35 +7,34 @@ import Logo from './components/logo/logo';
 import Header from './containers/header/header';
 import Home from './containers/home/home';
 import ErrorBoundary from './error_boundary';
-import { Movie } from './containers/movielist/movie_list';
 
 import './app.scss';
-import { Provider, useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
 import store, { useTypedSelector } from './redux/store';
-import { fetchMovies } from './redux/actions';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import NotFound from './containers/notfound/not_found';
+
+
 
 ReactModal.setAppElement('#app');
 
-export interface SelectedMovie {
-     movie: Movie|null; 
-     setMovie: React.Dispatch<React.SetStateAction<Movie|null>>;
-}
-
 const App = () => {
-    const dispatch = useDispatch();
-
     const movies = useTypedSelector(state => state.movies);
 
-    React.useEffect(() => {
-        dispatch(fetchMovies());
-    }, []);
-
     return (<>
-                <Header />
-                <ErrorBoundary hasErrors={false}>
-                    <Home movies={...movies} />
-                </ErrorBoundary>
-                <Footer><Logo /></Footer>
+            <ErrorBoundary hasErrors={false}>
+                <Router>
+                    <Header />
+                        <Switch>
+                            <Route exact path="/"><Home /></Route> 
+                            <Route path="/search"><Home movies={...movies} /></Route>
+                            <Route exact path="/orderBy"><Home movies={...movies} /></Route>
+                            <Route exact path="/filter"><Home movies={...movies} /></Route>
+                            <Route path="*"><NotFound /></Route>
+                        </Switch>
+                    <Footer><Logo /></Footer>
+                </Router>
+            </ErrorBoundary>
             </>);
 };
 

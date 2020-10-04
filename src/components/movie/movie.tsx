@@ -4,6 +4,7 @@ import { Movie } from '../../containers/movielist/movie_list';
 import MoreMenu from '../moremenu/more_menu';
 import { useDispatch } from 'react-redux';
 import { selectMovie } from '../../redux/actions';
+import { useHistory, useLocation } from 'react-router';
 
 interface MovieProps {
     movie: Movie;
@@ -13,7 +14,16 @@ const MovieItem = ({movie}: MovieProps) => {
 
 const dispatch = useDispatch();
 
-return <div className="movie" onClick={() => dispatch(selectMovie(movie))} >
+const history = useHistory();
+const location = useLocation();
+
+const movieClicked = React.useCallback(() => {
+    dispatch(selectMovie(movie));
+    location.hash = 'film/' + movie.id;
+    history.push(location);
+}, []);
+
+return <div className="movie" onClick={movieClicked} >
         <div className="poster">
             <div className="floating-menu"><MoreMenu {...movie} /></div>
             <img src={movie.poster_path} alt={movie.title}/>

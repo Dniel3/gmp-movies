@@ -4,21 +4,40 @@ import './home.scss';
 import MovieList, { Movie } from '../movielist/movie_list';
 import { useDispatch } from 'react-redux';
 import { orderMovies } from '../../redux/actions';
+import { useHistory, useLocation } from 'react-router';
 
 interface HomeProps {
-    movies: Movie[];
+    movies?: Movie[];
 }
 
 const Home = 
-    (props: HomeProps) => {
+    ({movies}: HomeProps) => {
         const dispatch = useDispatch();
-        
-        return <div className="home">
+
+        const history = useHistory();
+
+        const [orderChange, setOrderChange] = React.useState('');
+    
+        const location = useLocation();
+        React.useEffect(() => {
+            if(location.search.indexOf('orderBy') > 0) {
+                const urlSearch = location.search.split('=')[1];
+                setOrderChange(urlSearch);
+                dispatch(orderMovies(urlSearch));
+            }
+        }, [location]);
+
+        return <div className="home" style={ movies && movies.length ? {} : {height: '100%'}}>
                 <div className="actions">
                     <div className="genres"><GenreList /></div>
                     <div className="sort">
                         <label htmlFor="movie">SORT BY: </label>
-                        <select onChange={(event) => dispatch(orderMovies(event.target.value))}>
+                        <select value={orderChange} 
+                                onChange={(event) => {
+                                    const order = event.target.value;
+                                    dispatch(orderMovies(order));
+                                    history.push({pathname: '/orderBy', search: `?order=${order}`});
+                        }}>
                             <option value="" key="sort-none">SELECT</option>
                             <option value="release_date" key="sort-date">RELEASE DATE</option>
                             <option value="genres" key="sort-genre">GENRE</option>
@@ -26,7 +45,7 @@ const Home =
                         </select>
                     </div>
                 </div>
-                <MovieList movies={props.movies} />
+                {movies ? <MovieList movies={movies} /> : <div className="empty">Search Movies</div>}
             </div>;
     }
 

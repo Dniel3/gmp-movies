@@ -8,7 +8,8 @@ module.exports = (env) => {
     entry: './src/app.tsx',
     output: {
       path: path.join(__dirname, 'public'),
-      filename: 'bundle.js'
+      filename: 'bundle.js',
+      publicPath: '/',
     },
     module: {
       rules: [{
@@ -30,7 +31,8 @@ module.exports = (env) => {
     // sourceMap
     devtool: isProd ? 'source-map' : 'inline-source-map',
     devServer: {
-      contentBase: path.join(__dirname, 'public')
+      contentBase: path.join(__dirname, 'public'),
+      historyApiFallback: true,
     }
   };
 };

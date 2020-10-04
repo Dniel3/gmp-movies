@@ -4,15 +4,24 @@ import { Movie } from '../../containers/movielist/movie_list';
 import Logo from '../logo/logo';
 import { selectMovie } from '../../redux/actions';
 import './movie_details.scss';
+import { useHistory, useLocation } from 'react-router';
 
 const MovieDetails = (movie: Movie) => {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const location = useLocation()
+
+    const redirectHome = React.useCallback(() => {
+        dispatch(selectMovie(null))
+        location.hash = '';
+        history.push(location);
+    }, []);
 
     return(
         <div className="header">
             <div className="row-1">
                 <Logo/>
-                <button onClick={() => dispatch(selectMovie(null))}>Search</button>
+                <button onClick={redirectHome}>Search</button>
             </div>
             <div className="movie-details">
                 <img src={movie.poster_path} alt={movie.title}/>

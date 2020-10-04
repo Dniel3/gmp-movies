@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './movie_list.scss';
 import MovieItem from '../../components/movie/movie';
+import { Link } from 'react-router-dom';
 
 export interface Movie {
     //Movie unique identifier
@@ -33,12 +34,14 @@ interface MovieListProps {
  movies: Movie[];
 }
 
-const MovieList = ({movies}: MovieListProps) => <>
-    <p>{movies.length} movies found</p>
-    <div className="movies">{
-        movies.map((movie, index) => 
-            (<MovieItem {...{movie}} key={`${movie.id}-movie`}/>))
-    }</div>
-</>;
+const MovieList = ({movies}: MovieListProps) => {
+    return movies.length ?  <>    
+        <p>{movies.length} movies found</p>
+        <div className="movies">{
+            movies.map((movie, index) => 
+                (<MovieItem {...{movie}} key={`${movie.id}-movie`}/>))
+        }</div>
+    </> : <h5>Movies not found</h5>
+};
 
 export default MovieList
