@@ -5,17 +5,16 @@ import './header.scss';
 import AddMovieDialog from '../../components/moviedialogs/add_movie';
 import { useTypedSelector } from '../../redux/store';
 import MovieDetails from '../../components/moviedetails/movie_details';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const movie = useTypedSelector(state => state.selectedMovie);
 
-    if(movie) {
-        return <MovieDetails {...movie} />;
-    }
+    if(movie) return <MovieDetails {...movie} />;
 
     return <div className="header">
         <div className="row-1">
-            <Logo/>
+            <Link to="/"><Logo/></Link>
             <AddMovieDialog />
         </div>
         <div className="row-2">FIND YOUR MOVIE</div>

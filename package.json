@@ -8,6 +8,8 @@
     "build:prod": "webpack -p -env production",
     "dev-server": "webpack-dev-server",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
     "start": "live-server public/"
   },
   "author": "Danielram",
@@ -46,8 +48,10 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
+    "@testing-library/dom": "^7.24.5",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
+    "@testing-library/user-event": "^12.1.7",
     "@types/jest": "^26.0.14",
     "identity-obj-proxy": "^3.0.0",
     "ts-jest": "^26.4.1",

@@ -17,7 +17,7 @@ const MovieDetails = (movie: Movie) => {
         history.push(location);
     }, []);
 
-    return(
+    return (
         <div className="header">
             <div className="row-1">
                 <Logo/>
