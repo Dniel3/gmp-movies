@@ -39,7 +39,7 @@ const MovieList = ({movies}: MovieListProps) => {
         <p>{movies.length} movies found</p>
         <div className="movies">{
             movies.map((movie, index) => 
-                (<MovieItem {...{movie}} key={`${movie.id}-movie`}/>))
+                (<MovieItem {...movie} key={`${movie.id}-movie`}/>))
         }</div>
     </> : <h5>Movies not found</h5>
 };

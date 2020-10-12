@@ -1,16 +1,17 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import MoreMenu from "./more_menu";
 import { Movie } from "../../containers/movielist/movie_list";
 
 import { Provider } from 'react-redux';
 import store from "../../redux/store";
+
 import * as ReactModal from 'react-modal';
 
 ReactModal.setAppElement('body');
 
-const FAKE_MOVIE: Movie = {
+export const FAKE_MOVIE: Movie = {
     id: 399055,
     title: 'The Shape of Water',
     tagline: 'A Fairy Tale for Troubled Times',
@@ -35,6 +36,10 @@ beforeEach(() => {
             <MoreMenu {...FAKE_MOVIE}  / >
         </Provider>
     );
+});
+
+beforeEach(() => {
+    document.body.innerHTML = '';
 });
 
 it('should have edit button', () => {

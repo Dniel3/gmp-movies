@@ -6,11 +6,8 @@ import { useDispatch } from 'react-redux';
 import { selectMovie } from '../../redux/actions';
 import { useHistory, useLocation } from 'react-router';
 
-interface MovieProps {
-    movie: Movie;
-}
 
-const MovieItem = ({movie}: MovieProps) => {
+const MovieItem = (movie: Movie) => {
 
 const dispatch = useDispatch();
 
