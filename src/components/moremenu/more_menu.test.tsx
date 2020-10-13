@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import MoreMenu from "./more_menu";
 import { Movie } from "../../containers/movielist/movie_list";
@@ -30,34 +30,33 @@ export const FAKE_MOVIE: Movie = {
     runtime: 123
 }
 
-beforeEach(() => {
-    render(     
-        <Provider store={store}>
-            <MoreMenu {...FAKE_MOVIE}  / >
-        </Provider>
-    );
-});
+describe('MoreMenu', () => {
+    beforeEach(() => {
+        render(     
+            <Provider store={store}>
+                <MoreMenu {...FAKE_MOVIE}  / >
+            </Provider>
+        );
+    });
+    
 
-beforeEach(() => {
-    document.body.innerHTML = '';
-});
+    it('should have edit button', () => {
+        expect(screen.getByText('EDIT')).toBeDefined();
+    });
 
-it('should have edit button', () => {
-    expect(screen.getByText('EDIT')).toBeDefined();
-});
+    it('should have delete button', () => {
+        expect(screen.getByText('DELETE')).toBeDefined();
+    });
 
-it('should have delete button', () => {
-    expect(screen.getByText('DELETE')).toBeDefined();
-});
+    it('should open edit dialog', () => {
+        userEvent.click(screen.getByText('EDIT'));
 
-it('should open edit dialog', () => {
-    userEvent.click(screen.getByText('EDIT'));
+        expect(screen.getByText('EDIT MOVIE')).toBeDefined();
+    });
 
-    expect(screen.getByText('EDIT MOVIE')).toBeDefined();
-});
+    it('should open delete dialog', () => {
+        userEvent.click(screen.getByText('DELETE'));
 
-it('should open delete dialog', () => {
-    userEvent.click(screen.getByText('DELETE'));
-
-    expect(screen.getByText('DELETE MOVIE')).toBeDefined();
+        expect(screen.getByText('DELETE MOVIE')).toBeDefined();
+    });
 });

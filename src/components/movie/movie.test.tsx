@@ -9,29 +9,32 @@ import { FAKE_MOVIE } from "../moremenu/more_menu.test";
 
 import { MemoryRouter, Route } from 'react-router-dom';
 
-let history, location;
 
-beforeEach(() => {
-    render(     
-        <Provider store={store}>
-            <MemoryRouter initialEntries={["/initial"]}>
-                <MovieItem {...FAKE_MOVIE}  / >
-                <Route
-                    path="*"
-                    render={({ history, location }) => {
-                        history = history;
-                        location = location;
-                        return null;
-                    }}
-                />
-            </MemoryRouter>
-        </Provider>);
-});
+describe('movie', () => {
+    let history, location;
 
-
-it('should render props in movie item', () => {
-    expect(screen.getByAltText(FAKE_MOVIE.title)).toBeDefined();
-    expect(screen.getByText(FAKE_MOVIE.title)).toBeDefined();
-    expect(screen.getByText(FAKE_MOVIE.release_date.substring(0, 4))).toBeDefined();
-    expect(screen.getByText(FAKE_MOVIE.genres.join(', '))).toBeDefined();
+    beforeEach(() => {
+        render(     
+            <Provider store={store}>
+                <MemoryRouter initialEntries={["/initial"]}>
+                    <MovieItem {...FAKE_MOVIE}  / >
+                    <Route
+                        path="*"
+                        render={({ history, location }) => {
+                            history = history;
+                            location = location;
+                            return null;
+                        }}
+                    />
+                </MemoryRouter>
+            </Provider>);
+    });  
+    
+    
+    it('should render props in movie item', () => {
+        expect(screen.getByAltText(FAKE_MOVIE.title)).toBeDefined();
+        expect(screen.getByText(FAKE_MOVIE.title)).toBeDefined();
+        expect(screen.getByText(FAKE_MOVIE.release_date.substring(0, 4))).toBeDefined();
+        expect(screen.getByText(FAKE_MOVIE.genres.join(', '))).toBeDefined();
+    });
 });

@@ -3,8 +3,5 @@ module.exports = {
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     "\\.(css|scss)$": "identity-obj-proxy"
-  },
-  setupFiles: [
-    "react-app-polyfill/jsdom"
-  ],
+  }
 };
