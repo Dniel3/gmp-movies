@@ -43,10 +43,9 @@ export const INITIAL_STATE: MovieDialogState = {
 
 export function useMovieDialog(state: MovieDialogState, 
 setState: React.Dispatch<React.SetStateAction<MovieDialogState>>): {closeModal: () => void, openModal: () => void} {
-    const closeModal = React.useCallback(() => setState(INITIAL_STATE), [state.isOpened]);
+    const closeModal = () => setState(INITIAL_STATE);
     
-    const openModal = React.useCallback(
-            () => setState({...state, isOpened: true,}), [state.isOpened]);
+    const openModal = () => setState({...state, isOpened: true,});
 
     return {closeModal, openModal};
 }

@@ -20,7 +20,7 @@ const movieClicked = React.useCallback(() => {
     history.push(location);
 }, []);
 
-return <div className="movie" onClick={movieClicked} >
+return <div data-testid="movie-container" className="movie" onClick={movieClicked}>
         <div className="poster">
             <div className="floating-menu"><MoreMenu {...movie} /></div>
             <img src={movie.poster_path} alt={movie.title}/>
