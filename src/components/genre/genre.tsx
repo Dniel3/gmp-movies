@@ -11,6 +11,7 @@ const Genre = (props: GenreProps) => {
     const history = useHistory();
 
     const location = useLocation();
+
     React.useEffect(() => {
         if(location.search.indexOf('filter') > 0) {
             dispatch(filterMovies(location.search.split('=')[1]));
@@ -19,7 +20,6 @@ const Genre = (props: GenreProps) => {
 
     return <div onClick={() => {
                 const genres = props.name === Genres.ALL ? '' : props.name;
-                dispatch(filterMovies(genres));
 
                 history.push({pathname: '/filter', search: `?filter=${genres}`});
             }} 

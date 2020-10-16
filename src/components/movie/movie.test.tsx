@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import MovieItem from "./movie";
 
 import * as Redux from 'react-redux';

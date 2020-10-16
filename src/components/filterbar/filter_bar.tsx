@@ -11,7 +11,6 @@ const FilterBar = () => {
 
     const history = useHistory();
     const searchCb = React.useCallback(() => {
-        dispatch(searchMovies(search));
         history.push({pathname: '/search', search: `?search=${search}`});
     }, [search] );
 

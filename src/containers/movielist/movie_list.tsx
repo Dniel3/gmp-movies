@@ -38,7 +38,7 @@ const MovieList = ({movies}: MovieListProps) => {
     return movies.length ?  <>    
         <p>{movies.length} movies found</p>
         <div className="movies">{
-            movies.map((movie, index) => 
+            movies.map((movie) => 
                 (<MovieItem {...movie} key={`${movie.id}-movie`}/>))
         }</div>
     </> : <h5>Movies not found</h5>
