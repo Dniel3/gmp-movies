@@ -22,7 +22,7 @@ const DeleteMovieDialog  = (props: Movie) => {
             <form>
                 <div className="title">
                     <div>DELETE MOVIE</div>
-                    <button onClick={closeModal}>X</button>
+                    <button className="close-button" onClick={closeModal}>X</button>
                 </div>
                 
                 <div className="form-field">

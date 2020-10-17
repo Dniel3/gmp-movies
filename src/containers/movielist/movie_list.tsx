@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './movie_list.scss';
 import MovieItem from '../../components/movie/movie';
-import { Link } from 'react-router-dom';
 
 export interface Movie {
     //Movie unique identifier
