@@ -4,6 +4,7 @@ import { ActionCreator } from "redux";
 import { MOVIES_API_ROOT_URL } from "../movies_api";
 
 export enum MoviesActions {
+    UNKNOWN = 'movies/unknown',
     LOADING = 'movies/loading',
     ERROR = 'movies/error',
     LIST = 'movies/list',

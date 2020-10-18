@@ -48,7 +48,7 @@ describe('AddMovieDialog', () => {
 
         userEvent.click(document.querySelector('.reset')!);   
 
-        expect(screen.queryByDisplayValue('#add-title')).toBeNull();   
+        expect(screen.queryByDisplayValue(FAKE_MOVIE.title)).toBeNull();   
     });
 });
 

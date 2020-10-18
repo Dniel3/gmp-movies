@@ -10,21 +10,6 @@ export const INITIAL_STATE: MovieState = {
 
 const moviesReducer = (state: MovieState = INITIAL_STATE, action: MovieAction) => {
     switch(action.type) {
-        case MoviesActions.CREATE: {
-            return {...state, ...action.payload, loading: false,};
-        }
-        case MoviesActions.DELETE: {
-            return {};
-        }
-        case MoviesActions.UPDATE: {
-            return {};
-        }
-        case MoviesActions.SORT: {
-            return {};
-        }
-        case MoviesActions.FILTER: {
-            return {};
-        }
         case MoviesActions.LIST: {
             return {...state, ...action.payload, loading: false,};
         }
@@ -41,8 +26,7 @@ const moviesReducer = (state: MovieState = INITIAL_STATE, action: MovieAction) =
         case MoviesActions.SELECTED: {
             return {...state, ...action.payload};
         }
-        default:
-            return state; 
+        default: return state; 
     };  
 };
 

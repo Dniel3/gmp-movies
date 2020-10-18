@@ -17,7 +17,7 @@ describe('Genre', () => {
         store.dispatch = jest.fn();
         render(     
             <Redux.Provider store={store}>
-                <MemoryRouter initialEntries={["/initial"]}>
+                <MemoryRouter initialEntries={["/"]}>
                     <Genre {...FAKE_GENRE}  / >
                     <Route
                         path="*"
@@ -30,6 +30,10 @@ describe('Genre', () => {
                 </MemoryRouter>
             </Redux.Provider>);        
     });  
+ 
+    it('should not call filterMovies action for empty url params', () => {
+        expect(store.dispatch).not.toHaveBeenCalled();
+    });
     
     it('should render genre name', () => {
         expect(screen.getByText(FAKE_GENRE.name)).toBeDefined();
@@ -49,8 +53,7 @@ describe('Genre', () => {
     });
 });
 
-
-describe('Genre', () => {
+describe('Genre with url params', () => {
 
     beforeEach(() => {
         store.dispatch = jest.fn();
