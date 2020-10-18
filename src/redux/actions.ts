@@ -31,7 +31,7 @@ export const selectMovie = (selectedMovie: Movie|null): MovieAction => ({
     payload: {selectedMovie},
 });
 
-export const startLoading = (loading = true) => ({type: MoviesActions.LOADING, payload: {loading}});
+export const startLoading = () => ({type: MoviesActions.LOADING, payload: {loading: true}});
 
 export const error = (error: string) => ({type: MoviesActions.ERROR, payload: {error}});
 
@@ -50,7 +50,7 @@ export const deleteMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[
         return async (dispatch) => {
             dispatch(startLoading());
             const deleteRequest = new Request(`${MOVIES_API_ROOT_URL}/${movieId}`, {method: 'DELETE'});
-            await fetch(deleteRequest).then(result => result.json());
+            await fetch(deleteRequest);
             return dispatch(fetchMovies());
         };
 }
@@ -64,8 +64,9 @@ export const createMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[
                         method: 'POST', 
                         body: JSON.stringify(movie),                    
                         headers: {'Content-Type': 'application/json'},
-            });
-            const response = await fetch(createRequest).then(result => result.json());
+                    }
+                );
+            await fetch(createRequest);
             return dispatch(fetchMovies());
         };
 }
@@ -79,8 +80,9 @@ export const editMovie: ActionCreator<ThunkAction<Promise<MovieAction>, Movie[],
                         method: 'PUT', 
                         body: JSON.stringify(movie),  
                         headers: {'Content-Type': 'application/json'},
-                });
-            await fetch(editRequest).then(result => result.json());
+                    }
+                );
+            await fetch(editRequest);
             return dispatch(fetchMovies());
         };
 }

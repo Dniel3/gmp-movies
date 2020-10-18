@@ -20,6 +20,7 @@
     "@types/react-modal": "^3.10.6",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
+    "@types/redux-mock-store": "^1.0.2",
     "@types/yup": "^0.29.7",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
@@ -38,6 +39,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
+    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",
@@ -52,8 +54,10 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.7",
+    "@types/fetch-mock": "^7.3.3",
     "@types/jest": "^26.0.14",
     "identity-obj-proxy": "^3.0.0",
+    "jest-fetch-mock": "^3.0.3",
     "ts-jest": "^26.4.1",
     "webpack-cli": "^3.3.12"
   }
