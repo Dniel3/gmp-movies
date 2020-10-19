@@ -81,6 +81,7 @@ const EditMovieFormik = withFormik<EditMovieDialogProps, FormMovie>({
     }),
     enableReinitialize: true,
     validationSchema: EDIT_MOVIE_VALIDATION_SCHEMA,
+    validateOnChange: true,
 })(EditMovieForm);
 
 export default EditMovieFormik;

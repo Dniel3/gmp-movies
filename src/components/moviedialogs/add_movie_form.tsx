@@ -77,7 +77,7 @@ const AddMovieFormik = withFormik<AddMovieDialogProps, FormMovie>({
     },
     mapPropsToValues: () => (INITIAL_FORM_VALUES),
     enableReinitialize: true,
-    validationSchema: MOVIE_VALIDATION_SCHEMA,
+    validationSchema: MOVIE_VALIDATION_SCHEMA,validateOnChange: true
 })(AddMovieForm);
 
 export default AddMovieFormik;

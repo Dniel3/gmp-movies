@@ -7,6 +7,7 @@ import store from "../../redux/store";
 import { MemoryRouter, Route } from 'react-router-dom';
 import userEvent from "@testing-library/user-event";
 import Genre from "./genre";
+import { Genres } from "../../containers/genrelist/genre_list";
 
 const FAKE_GENRE = {name: 'TACO'};
 
@@ -67,5 +68,34 @@ describe('Genre with url params', () => {
     
     it('should dispatch filterMovies action when url has filter params', () => {
         expect(store.dispatch).toHaveBeenCalled();
+    });
+});
+
+describe('Genre All', () => {
+    let fakeHistory: any, fakeLocation: any;
+
+    beforeEach(() => {
+        store.dispatch = jest.fn();
+        render(     
+            <Redux.Provider store={store}>
+                <MemoryRouter initialEntries={["/"]}>
+                    <Genre name={Genres.ALL}  / >
+                    <Route
+                        path="*"
+                        render={({ history, location }) => {
+                            fakeHistory = history;
+                            fakeLocation = location;
+                            return null;
+                        }}
+                    />
+                </MemoryRouter>
+            </Redux.Provider>);        
+    });  
+ 
+    it('should navigate to search all page', () => {
+        userEvent.click(screen.getByText('ALL'));
+
+        expect(fakeHistory.entries[1].pathname).toBe('/filter');
+        expect(fakeHistory.entries[1].search).toBe('?filter=');
     });
 });

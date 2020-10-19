@@ -12,7 +12,7 @@ import { FAKE_MOVIE } from "../moremenu/more_menu.test";
 
 ReactModal.setAppElement('body');
 
-describe('AddMovieDialog', () => {
+describe('AddMovieFormik', () => {
 
     const addMovie = store.dispatch = jest.fn();
 

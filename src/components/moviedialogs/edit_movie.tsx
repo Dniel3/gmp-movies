@@ -32,7 +32,7 @@ const EditMovieDialog = (props: Movie) => {
             
             <div className="title">
                 <div>EDIT MOVIE</div>
-                <button onClick={closeModal}>X</button>
+                <button className="close-button" onClick={closeModal}>X</button>
             </div>
             <EditMovieFormik movie={props} editMovie={edit} />            
         </ReactModal>
