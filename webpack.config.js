@@ -26,7 +26,7 @@ module.exports = (env) => {
       }]
     },
     resolve: {
-      extensions: [ '.tsx', '.ts', '.js' ],
+      extensions: ['.tsx', '.ts', '.js'],
     },
     // sourceMap
     devtool: isProd ? 'source-map' : 'inline-source-map',
