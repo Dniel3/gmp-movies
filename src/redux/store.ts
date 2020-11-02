@@ -1,15 +1,8 @@
-import { createStore, applyMiddleware } from "redux";
-import thunkMiddleware from 'redux-thunk'
-import { useSelector, TypedUseSelectorHook } from 'react-redux'
-import { Movie } from "../containers/movielist/movie_list";
-import moviesReducer from "./reducers/movies";
-
-export interface MovieState {
-    loading: boolean;
-    movies: Movie[];
-    selectedMovie: Movie|null;
-    error: string;
-}
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { useSelector, TypedUseSelectorHook } from 'react-redux';
+import moviesReducer from './reducers/movies';
+import { MovieState } from './model';
 
 export interface MovieStore {
     movies: MovieState;

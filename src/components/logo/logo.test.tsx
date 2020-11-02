@@ -1,7 +1,7 @@
-import * as React from "react";
-import Logo from "./logo";
-import { render } from "@testing-library/react";
+import * as React from 'react';
+import { render } from '@testing-library/react';
+import Logo from './Logo';
 
 it('should render logo', () => {
-    expect(render(<Logo />).asFragment).toMatchSnapshot();
+  expect(render(<Logo />).asFragment).toMatchSnapshot();
 });

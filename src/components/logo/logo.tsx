@@ -1,8 +1,11 @@
 import * as React from 'react';
-import './logo.scss';
+import './Logo.scss';
 
-const Logo = () => {
-    return <div className="logo"><strong>netflix</strong>roulet</div>;
-}
+const Logo = () => (
+  <div className="logo">
+    <strong>netflix</strong>
+    roulet
+  </div>
+);
 
-export default Logo
+export default Logo;
