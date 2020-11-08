@@ -6,6 +6,6 @@ const selectMovies = (state: MovieState) => state.movies;
 
 const selectClickedMovie = (state: MovieState) => state.selectedMovie;
 
-//PATERN: use reselect library
-export const moviesSelector = createSelector(state => state, selectMovies);
-export const clickedMovieSelector = createSelector(state => state, selectClickedMovie);
+// PATERN: use reselect library
+export const moviesSelector = createSelector((state) => state, selectMovies);
+export const clickedMovieSelector = createSelector((state) => state, selectClickedMovie);

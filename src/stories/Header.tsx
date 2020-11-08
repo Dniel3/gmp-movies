@@ -10,7 +10,9 @@ export interface HeaderProps {
   onCreateAccount: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ user, onLogin, onLogout, onCreateAccount }) => (
+export const Header: React.FC<HeaderProps> = ({
+  user, onLogin, onLogout, onCreateAccount,
+}) => (
   <header>
     <div className="wrapper">
       <div>
@@ -36,11 +38,11 @@ export const Header: React.FC<HeaderProps> = ({ user, onLogin, onLogout, onCreat
         {user ? (
           <Button size="small" onClick={onLogout} label="Log out" />
         ) : (
-            <>
-              <Button size="small" onClick={onLogin} label="Log in" />
-              <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
-            </>
-          )}
+          <>
+            <Button size="small" onClick={onLogin} label="Log in" />
+            <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
+          </>
+        )}
       </div>
     </div>
   </header>
