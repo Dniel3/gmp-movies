@@ -21,6 +21,7 @@
   "dependencies": {
     "@storybook/addon-knobs": "^6.0.28",
     "@storybook/preset-create-react-app": "^3.1.4",
+    "@types/reselect": "^2.2.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
@@ -36,6 +37,7 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",
     "ts-loader": "^8.0.7",

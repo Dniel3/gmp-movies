@@ -2,13 +2,14 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.scss';
 import AddMovieDialog from '../../components/moviedialogs/AddMovie';
-import { useTypedSelector } from '../../redux/store';
 import MovieDetails from '../../components/moviedetails/MovieDetails';
 import FilterBar from '../../components/filterbar/FilterBar';
 import Logo from '../../components/logo/Logo';
+import { clickedMovieSelector } from '../../redux/selectors';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const movie = useTypedSelector((state) => state.selectedMovie);
+  const movie = useSelector(clickedMovieSelector);
 
   if (movie) return <MovieDetails movie={movie} />;
 

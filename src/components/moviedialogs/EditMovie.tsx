@@ -22,7 +22,7 @@ const EditMovieDialog = ({ movie }: EditMovieDialogProps) => {
     dispatch(editMovie({
       ...movie,
       ...values,
-    }));
+    } as Readonly<Movie>));
     closeModal();
   };
 

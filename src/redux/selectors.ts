@@ -1,5 +1,11 @@
+import { createSelector } from 'reselect';
+import { searchMovies } from './actions';
 import { MovieState } from './model';
 
-export const getMovies = (state: MovieState) => state.movies;
+const selectMovies = (state: MovieState) => state.movies;
 
-export const getSelectedMovie = (state: MovieState) => state.selectedMovie;
+const selectClickedMovie = (state: MovieState) => state.selectedMovie;
+
+//PATERN: use reselect library
+export const moviesSelector = createSelector(state => state, selectMovies);
+export const clickedMovieSelector = createSelector(state => state, selectClickedMovie);

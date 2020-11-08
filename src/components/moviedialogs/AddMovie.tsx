@@ -8,6 +8,7 @@ import {
 import { createMovie } from '../../redux/actions';
 
 import AddMovieFormik from './AddMovieForm';
+import { Movie } from '../../model/movie';
 
 const AddMovieDialog = () => {
   const [state, setState] = React.useState<MovieDialogState>(INITIAL_STATE);
@@ -21,7 +22,7 @@ const AddMovieDialog = () => {
       vote_count: 0,
       budget: 0,
       revenue: 0,
-    }));
+    } as Readonly<Movie>));
   };
 
   const { closeModal, openModal } = useMovieDialog(state, setState);
