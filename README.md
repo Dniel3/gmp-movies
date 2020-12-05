@@ -1,4 +1,4 @@
-# gmp-movies
+# gmp-movies built with Typescript
 
  Run app:
 
