@@ -1,6 +1,6 @@
 # gmp-movies built with Typescript
 
-Requires Movies API server
+Requires Movies API server.
 
  Run app:
 
